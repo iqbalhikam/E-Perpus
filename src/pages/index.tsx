@@ -1,12 +1,7 @@
-import Head from "next/head";
-import Link from "next/link";
 import { ModeToggle } from "~/components/ModeToogle";
 import { Button } from "~/components/ui/button";
 
-import { api } from "~/utils/api";
-
 export default function Home() {
-  const hello = api.post.hello.useQuery({ text: "from tRPC" });
 
   return (
     <>
