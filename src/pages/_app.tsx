@@ -5,7 +5,8 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import { ThemeProvider } from "~/components/theme-provider";
-import Header from "~/components/features/auth/components/Header";
+import Header from "~/components/Header";
+
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -16,7 +17,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       disableTransitionOnChange
     >
       <div className={GeistSans.className}>
-        <Header />
+        {/* <Header /> */}
         <Component {...pageProps} />
       </div>
     </ThemeProvider>

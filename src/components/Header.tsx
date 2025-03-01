@@ -1,5 +1,6 @@
 import React from "react";
-import { ModeToggle } from "./ModeToogle";
+import { ModeToggle } from "./features/auth/components/ModeToogle";
+
 
 const Header = () => {
   return (
