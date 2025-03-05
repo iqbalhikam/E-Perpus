@@ -5,6 +5,7 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import { ThemeProvider } from "~/components/theme-provider";
+import { Toaster } from "~/components/ui/sonner";
 import Header from "~/components/Header";
 
 
@@ -12,13 +13,14 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="dark"
+      defaultTheme="system"
       enableSystem
       disableTransitionOnChange
     >
       <div className={GeistSans.className}>
-        {/* <Header /> */}
+        <Header />
         <Component {...pageProps} />
+        <Toaster />
       </div>
     </ThemeProvider>
   );

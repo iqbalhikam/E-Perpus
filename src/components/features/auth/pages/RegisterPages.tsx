@@ -11,33 +11,40 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import {
-  Form
-} from "~/components/ui/form";
+import { Form } from "~/components/ui/form";
 import RegisterFormInner from "../components/RegisterFormInner";
 import { registerFormSchema, type RegisterFormSchema } from "../forms/register";
+import { api } from "~/utils/api";
+import { toast } from "sonner";
 
 const RegisterPages = () => {
   const form = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
   });
+
+  const { mutate: registerUser, isPending } = api.auth.register.useMutation({
+    onSuccess : () => {
+      toast.success("Register Berhasil")
+    },
+    onError : () => {
+      toast.error("Register Gagal")
+    }
+  });
   const hendleRegisterSubmit = (values: RegisterFormSchema) => {
-    alert(
-      `Nama:      ${values.name}, 
-      \nEmail:    ${values.email},
-      \nPassword: ${values.password}`
-    );
+    registerUser(values);
   };
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <Card className="w-[400px]">
         <CardHeader className="items-center pb-10">
           <CardTitle className="text-3xl font-bold">Buat Akun</CardTitle>
-          <CardDescription className="flex text-center text-xs max-w-72">ePerpus mempermudah anda dalam mencari buku</CardDescription>
+          <CardDescription className="flex max-w-72 text-center text-xs">
+            Q&A Dengan creator favoritmu lebih mudah
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <RegisterFormInner onRegisterSubmit={hendleRegisterSubmit}/>
+            <RegisterFormInner onRegisterSubmit={hendleRegisterSubmit} isLoading={isPending} />
           </Form>
         </CardContent>
         <CardFooter className="flex flex-col gap-5">
@@ -48,7 +55,7 @@ const RegisterPages = () => {
             </p>
             <div className="h-[2px] w-full border-t-2" />
           </div>
-          <Button variant={"secondary"} className="w-full">
+          <Button size={"lg"} variant={"secondary"} className="w-full">
             <FcGoogle /> Daftar dengan Google
           </Button>
           <p className="text-xs">

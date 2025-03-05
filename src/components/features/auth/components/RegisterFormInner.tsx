@@ -13,7 +13,8 @@ import { type RegisterFormSchema } from "../forms/register";
 import { useState } from "react";
 
 type RegisterFormInnerProps = {
-  onRegisterSubmit: (values: RegisterFormSchema) => void;
+  onRegisterSubmit: (values: RegisterFormSchema) => void,
+  isLoading? : boolean
 };
 const RegisterFormInner = (props: RegisterFormInnerProps) => {
   const form = useFormContext<RegisterFormSchema>();
@@ -23,21 +24,6 @@ const RegisterFormInner = (props: RegisterFormInnerProps) => {
       onSubmit={form.handleSubmit(props.onRegisterSubmit)}
       className="flex flex-col gap-y-1"
     >
-      <FormField
-        control={form.control}
-        name="name"
-        render={({ field }) => (
-          <FormItem className="flex flex-col gap-1">
-            <FormLabel>Nama</FormLabel>
-            <FormControl>
-              <Input type="text" placeholder="Masukkan name anda" {...field} />
-            </FormControl>
-            <div className="flex h-0 w-full items-center justify-end bg-primary">
-              <FormMessage />
-            </div>
-          </FormItem>
-        )}
-      />
       <FormField
         control={form.control}
         name="email"
@@ -88,7 +74,7 @@ const RegisterFormInner = (props: RegisterFormInnerProps) => {
         />
         Show password
       </label>
-      <Button className="mt-3 w-full bg-primary">Daftar</Button>
+      <Button disabled={props.isLoading} size={"lg"} className="mt-3 w-full bg-primary">{props.isLoading ? "Loading..." : "Daftar"}</Button>
     </form>
   );
 };

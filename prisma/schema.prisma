@@ -20,9 +20,8 @@ model Post {
     @@index([name])
 }
 
-model users {
-    user_id Int @id @default(autoincrement())
+model Profile {
+    userId String @id
     email String @unique
-    pass String
-    name String
+    username String @unique
 }
