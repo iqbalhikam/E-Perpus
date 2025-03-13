@@ -20,7 +20,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <div className={GeistSans.className}>
         <Header />
         <Component {...pageProps} />
-        <Toaster />
+        <Toaster/>
       </div>
     </ThemeProvider>
   );
